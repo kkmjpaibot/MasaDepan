@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MasaDepanAnakKita Chatbot</title>
+    <link rel="stylesheet" href="/static/Chatbot.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Modern Chat Header -->
+        <div class="chat-header">
+            <img src="/static/avatar.png" alt="Jenny">
+            <span>KKMJP Super Agent</span>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chat" class="chat-box">
+            <!-- Floating emojis -->
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+            <div class="emoji-bg"></div>
+        </div>
+
+        <!-- User Input -->
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Type your answer...">
+            <button id="send-btn">&#9658;</button>
+        </div>
+    </div>
+
+    <script src="/static/Chatbot.js"></script>
+
+    <!-- Initialize emoji background dynamically -->
+    <script>
+        const emojis = document.querySelectorAll('.chat-box .emoji-bg');
+        const images = ['education.png', 'edu.png'];
+
+        emojis.forEach((emoji, index) => {
+            emoji.style.backgroundImage = `url('/static/${images[index % 2]}')`;
+            emoji.style.top = `${5 + index * 8}%`;  // vertical spacing
+            emoji.style.left = `${10 + (index * 15) % 80}%`; // horizontal random-ish spacing
+            emoji.style.width = `${30 + (index * 3)}px`;
+            emoji.style.height = `${30 + (index * 3)}px`;
+            emoji.style.animationDuration = `${5 + (index % 3)}s`;
+            emoji.style.animationDelay = `${index * 0.5}s`;
+        });
+    </script>
+</body>
+</html>

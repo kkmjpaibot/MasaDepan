@@ -1,0 +1,293 @@
+/* -----------------------
+   Body & Chat Container
+------------------------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e6f0fa, #f5f5f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.chat-container {
+    background: #ffffff;
+    width: 400px;
+    max-width: 95%;
+    height: 490px;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* -----------------------
+   Chat Header
+------------------------- */
+.chat-header {
+    background-color: #002b5b;
+    color: white;
+    padding: 15px 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    gap: 10px;
+}
+
+.chat-header img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* -----------------------
+   Chat Box
+------------------------- */
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f9f9f9;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* -----------------------
+   Floating Emoji Background
+------------------------- */
+.chat-box .emoji-bg {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    pointer-events: none; /* doesn't block chat */
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite alternate;
+}
+
+.chat-box .emoji-bg:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; background-image: url('education.png'); }
+.chat-box .emoji-bg:nth-child(2) { top: 15%; left: 70%; animation-delay: 1s; background-image: url('edu.png'); }
+.chat-box .emoji-bg:nth-child(3) { top: 25%; left: 30%; animation-delay: 2s; background-image: url('education.png'); }
+.chat-box .emoji-bg:nth-child(4) { top: 35%; left: 80%; animation-delay: 3s; background-image: url('edu.png'); }
+.chat-box .emoji-bg:nth-child(5) { top: 45%; left: 50%; animation-delay: 1.5s; background-image: url('education.png'); }
+.chat-box .emoji-bg:nth-child(6) { top: 55%; left: 20%; animation-delay: 2.5s; background-image: url('edu.png'); }
+.chat-box .emoji-bg:nth-child(7) { top: 60%; left: 75%; animation-delay: 0.8s; background-image: url('education.png'); }
+.chat-box .emoji-bg:nth-child(8) { top: 70%; left: 10%; animation-delay: 3.5s; background-image: url('edu.png'); }
+.chat-box .emoji-bg:nth-child(9) { top: 80%; left: 60%; animation-delay: 4s; background-image: url('education.png'); }
+.chat-box .emoji-bg:nth-child(10){ top: 85%; left: 30%; animation-delay: 4.5s; background-image: url('edu.png'); }
+
+.chat-box .emoji-bg {
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(10deg); }
+    100% { transform: translateY(0) rotate(-10deg); }
+}
+
+/* Ensure messages appear above emojis */
+.chat-box p {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+/* -----------------------
+   Messages
+------------------------- */
+.bot-msg {
+    background: #2c3e50;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 20px 20px 20px 5px;
+    display: inline-block;
+    align-self: flex-start;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    animation: slideInLeft 0.3s ease-out;
+}
+
+.user-msg {
+    background: #fbeaa5;
+    color: #000;
+    padding: 14px 18px;
+    border-radius: 20px 20px 5px 20px;
+    display: inline-block;
+    align-self: flex-end;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    animation: slideInRight 0.3s ease-out;
+}
+
+/* -----------------------
+   Option Buttons
+------------------------- */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 5px 0;
+}
+
+.option-btn {
+    padding: 12px 16px;
+    background-color: #efeec6;
+    color: #002b5b;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.option-btn:hover {
+    background-color: #002b5b;
+    color: #fff;
+}
+
+/* -----------------------
+   Input Area
+------------------------- */
+#input-area {
+    display: flex;
+    padding: 12px 15px;
+    border-top: 1px solid #ddd;
+    background: #002b5b;
+    align-items: center;
+}
+
+#user-input {
+    flex: 1;
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: 1px solid #f0eeda;
+    outline: none;
+    font-size: 14px;
+    margin-right: 10px;
+    transition: all 0.2s ease;
+}
+
+#user-input:focus {
+    border-color: #002b5b;
+    box-shadow: 0 0 5px rgba(0,43,91,0.2);
+}
+
+#user-input::placeholder {
+    color: #aaa;
+}
+
+#send-btn {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 50%;
+    background: #002b5b;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
+}
+
+#send-btn:hover {
+    background-color: #0055a0;
+}
+
+/* Disabled input area state (conversation ended) */
+#input-area.disabled {
+    opacity: 0.7;
+}
+
+#input-area.disabled input,
+#input-area.disabled button {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Restart button (shown at end of conversation) */
+.restart-btn {
+    background-color: #002b5b;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.restart-btn:hover {
+    background-color: #0055a0;
+}
+
+/* -----------------------
+   Scrollbar Styling
+------------------------- */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.15);
+    border-radius: 3px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* -----------------------
+   Typing indicator
+------------------------- */
+.typing-indicator {
+    display: inline-flex;
+    gap: 8px;
+    align-self: flex-start;
+    padding: 10px 14px;
+    background: #2c3e50;
+    border-radius: 20px 20px 20px 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.typing-indicator .dot {
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.3;
+    transform: translateY(0);
+    animation: dotBounce 1s infinite ease-in-out;
+}
+.typing-indicator .dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-indicator .dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes dotBounce {
+    0% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-6px); }
+    100% { opacity: 0.3; transform: translateY(0); }
+}
+
+/* -----------------------
+   Animations
+------------------------- */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
