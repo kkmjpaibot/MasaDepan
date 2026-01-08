@@ -2,8 +2,11 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
 import logging
 import datetime
+import os
 
 # -----------------------------
 # Configuration
@@ -23,7 +26,7 @@ AGENT_WHATSAPP = "60168357258"  # No +
 def send_campaign2_email(to_email, session_data, calc_result):
     """
     Sends a modern, visually appealing education savings summary email
-    based on Campaign 2 chatbot data.
+    based on Campaign 2 chatbot data, with Benefits.pdf attached.
     """
     try:
         whatsapp_link = (
@@ -192,6 +195,24 @@ def send_campaign2_email(to_email, session_data, calc_result):
         msg["Subject"] = SUBJECT
         msg.attach(MIMEText(body, "html"))
 
+        # -----------------------------
+        # Attach Benefits.pdf
+        # -----------------------------
+        filename = "Benefits.pdf"  # Change path if it's in a subfolder, e.g., "attachments/Benefits.pdf"
+        if os.path.exists(filename):
+            with open(filename, "rb") as f:
+                part = MIMEBase("application", "pdf")
+                part.set_payload(f.read())
+                encoders.encode_base64(part)
+                part.add_header(
+                    "Content-Disposition",
+                    f'attachment; filename="{os.path.basename(filename)}"',
+                )
+                msg.attach(part)
+        else:
+            logging.warning(f"Attachment {filename} not found. Email will be sent without it.")
+
+        # Send email
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
         server.login(SMTP_USERNAME, SMTP_PASSWORD)
