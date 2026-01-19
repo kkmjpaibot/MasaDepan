@@ -167,10 +167,11 @@ function nextStep(input) {
             return alert("Invalid format of Date of birth");
         }
 
-        const age = calculateAge(input);
-        if (age < 18) {
-            return alert("You must be at least 18 years old.");
-        }
+       const age = calculateAge(input);
+       if (age < 18 || age > 80) {
+        return alert("Sorry, only users aged between 18 and 80 can use this chatbot.");
+    }
+
 
         formData.dob = input;
         addMessage(input, "user");

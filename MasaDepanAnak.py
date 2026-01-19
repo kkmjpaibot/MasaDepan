@@ -72,8 +72,9 @@ def submit():
     except:
         return jsonify({"error": "Invalid Date of Birth"}), 400
 
-    if age < 18:
-        return jsonify({"error": "User must be at least 18 years old"}), 400
+    if age < 18 or age > 80:
+        return jsonify({"error": "User must be between 18 and 80 years old"}), 400
+
 
     # --------------------------
     # Child age validation
